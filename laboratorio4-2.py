@@ -21,9 +21,14 @@ from passlib.hash import argon2
 #esta función puede recibir una gran cantidad de parámetros como cantidad de rondsas, costo de memoria, entre otros, pero si no se especifica utiliza los valores default
 h = argon2.hash("password")
 #adentro de la función, la variable sprint que se manda como input se codifica a UTF-8 y luego es mandado a la función Argon2 para hacerle hash
+print("-----Implementación de Argon2-----")
 print(h)
+print("Compara la contraseña 'password' con 'password':")
 print(argon2.verify("password", h))
-print(argon2.verify("contraseñaS", h))
+print("Compara la contraseña 'password' con 'contraseña':")
+print(argon2.verify("contraseña", h))
+print("El backend que está utilizando para la función de verify. Si no hubiera un backend disponible daría el error 'MissingBackendError':")
+print(argon2.get_backend())
 
 #PBKDF2 
 #Extraído de https://cryptobook.nakov.com/mac-and-key-derivation/pbkdf2
@@ -37,9 +42,8 @@ salt = binascii.unhexlify('aaef2d3f4d77ac66e9c5a6c3d8f921d1') ##genera data bina
 word="password" #palabra que se desea "hashear" para encriptarlo
 passwd = word.encode("utf8")#regresa la versión codificada de un string
 key = pbkdf2_hmac("sha256", passwd, salt, 50000, 32) #se aplica la funcíón con la cantidad de iteraciones, el tipo de hash deseado, la palabra encriptar, el salt, y la longitud del output
+print("-----Implementación de PBKDF2-----")
 print("Derived key:", binascii.hexlify(key))#se recibe de binario a hexadecimal para el output final
-
-
 
 #Literatura citada:
 #https://crypto.stackexchange.com/questions/1776/can-you-help-me-understand-what-a-cryptographic-salt-is
